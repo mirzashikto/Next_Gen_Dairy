@@ -1,0 +1,414 @@
+{% extends 'main.html' %}
+
+
+
+
+{%block main_card%}
+
+<nav class="breadcrumbs">
+    <a style="color: rgb(18, 51, 51); text-decoration: none;" href="/" class="breadcrumbs__item"><i style="font-size: 22px;" class="mx-2 bi bi-house-door"></i>Home</a>
+    <a style="color: rgb(9, 43, 43); text-decoration: none;" href="/cows" class="breadcrumbs__item"><i style="font-size: 22px;" class="mx-2 bi bi-disc-fill"></i>Cows</a>
+    <a style="color: rgb(9, 43, 43); text-decoration: none;" href="/addcow" class="breadcrumbs__item"><i style="font-size: 22px;" class="mx-2 bi bi-disc-fill"></i>Add Cow</a> 
+</nav>
+  
+
+<div class="row m-3">
+    <div style="text-align: center;" class="col-lg-12">
+
+        <h1 class="page_tittle" >Edit Cow : {{data.cow_id}} </h1>
+        <div class="h-line bg-dark"></div>
+    </div>
+</div>
+
+<div  class="row accessCreate">
+    <div  class="col-xs-12 col-sm-12">
+        
+        <!-- div.table-responsive -->
+        <div style="border: 2px solid #ddd;" class="rounded shadow bg-white">
+            <form action="/cow_edit/{{data.cow_id}}"  method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="form-group m-2">
+                                        <label >Cows ID <span class="red">*</span></label>
+                                        <input class="form-control focusField" name="cow_id" value="{{data.cow_id}}" disabled  data-placement="top" />
+                                    </div>
+                                </div>
+                                <!-- <div class="col-xs-12 col-sm-6">
+                                        <div class="form-group m-2">
+                                                <label for="cow_name">Cows Name</label>
+                                                <input class="form-control focusField" name="cow_name" id="cow_name" value="Cows Name "/>
+                                        </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="form-group m-2">
+                                <label for="purchase_date">Purchase Date</label>
+                                <input type="date"  class="form-control date-picker" name="purchase_date" value="{{data.purchase_date}}" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="form-group m-2">
+                                <label for="purchase_price">Purchase Price (BDT) </label>
+                                <input class="form-control focusField text-right" name="purchase_price"  value="{{data.purchase_price}}" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group m-2">
+                                        <label for="purchase_age">Age <span class="red">*</span></label>
+                                        <input class="form-control focusField" name="purchase_age"  value="{{data.purchase_age}}"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group m-2">
+                                        <label for="purchase_weight">Weight (Kg)</label>
+                                        <input class="form-control focusField text-right" name="purchase_weight"  value="{{data.purchase_weight}}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group m-2">
+                                        <label for="cow_color">Color</label>
+                                        <input class="form-control focusField" name="cow_color"  value="{{data.cow_color}}"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group m-2">
+                                        <label for="batch_id">Select Batch</label>
+                                        <select class="form-control" name="batch_id"  >
+                                            <option value="{{data.batch_id}}">{{data.batch_id}}</option>
+                                            <option value="6">Korbani 2022</option>
+                                            <option value="5">Batch 2</option>
+                                            <option value="4">Batch 1</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group m-2">
+                                        <label for="cow_type">Cows Variety <span class="red">*</span></label>
+                                        <select class="form-control" name="cow_type"  >
+                                            <option value=""></option>
+                                            <option value="Cross">Cross</option>
+                                            <option value="Deshi">Deshi</option>                                                            </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group m-2">
+                                        <label for="cow_sub_type">Sub Variety </label>
+                                        <select class="form-control" name="cow_sub_type"  >
+                                            <option value=""></option>
+                                            <option value="Adult">Adult</option>
+                                            <option value="Kid">Kid</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group m-2">
+                                        <label for="cow_gender">Gender <span class="red">*</span></label>
+                                        <select class="form-control" name="cow_gender"   >
+                                            <option value=""></option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>                                                            </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group m-2">
+                                        <label for="farm">Farm<span class="red">*</span></label>
+                                        <select class="form-control" name="farm"   >
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="form-group m-2">
+                                <label for="purchase_place">Purchase Place </label>
+                                <input class="form-control focusField" name="purchase_place" value="{{data.purchase_place}}"  />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="form-group m-2">
+                                <label for="vendor_contact_number">Vendor Contact Number</label>
+                                <input class="form-control focusField" name="vendor_contact_number"  value="{{data.vendor_contact_number}}"  />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="form-group m-2">
+                                <label for="paternal_history">Paternal History</label>
+                                <textarea class="form-control focusField" name="paternal_history"  >{{data.paternal_history}}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="form-group m-2">
+                                <label for="maternal_history">Maternal History</label>
+                                <textarea class="form-control focusField" name="maternal_history" >{{data.maternal_history}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group m-2">
+                                        <label for="deworming">Deworming <span class="red">*</span></label>
+                                        <select class="form-control" name="deworming"  required >
+                                            <option value="no">No</option>
+                                            <option value="yes">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group m-2">
+                                        <label for="deworming_date">Deworming Date</label>
+                                        <input type="date"  class="form-control date-picker" name="deworming_date"  value="{{data.deworming_date}}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group m-2">
+                                        <label for="vaccination">Vaccination <span class="red">*</span></label></label>
+                                        <select class="form-control" name="vaccination" required  >
+                                            <option value="no">No</option>
+                                            <option value="yes">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group m-2">
+                                        <label for="vaccination_date">Date</label>
+                                        <input type="date" class="form-control date-picker" name="vaccination_date"  value="{{data.vaccination_date}}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group m-2">
+                                        <label for="estimate_weight">
+                                            <span style="font-size: 10px;">Estimate Weight (Kg)</span>
+                                            &nbsp;
+                                        </label>
+                                        <input class="form-control focusField text-right" name="estimate_weight"  value="{{data.estimate_weight}}"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group m-2">
+                                        <label for="expected_selling_price">
+                                            <span style="font-size: 10px;">Expected Selling Price (BDT)</span>
+                                            &nbsp;
+                                        </label>
+                                        <input class="form-control focusField text-right" name="expected_selling_price"  value="{{data.expected_selling_price}}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="form-group m-2">
+                                <label for="estimate_sale_date">Estimate Sale Date</label>
+                                <input type="date"  class="form-control date-picker" name="estimate_sale_date"  value="{{data.estimate_sale_date}}"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group m-2">
+                                        <label for="cow_status">Cows Status <span class="red">*</span></label>
+                                        <select class="form-control" name="cow_status" required >
+                                            <option value="active">Active</option>
+                                            <option value="inactive">Inactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="form-group m-2">
+                                        <label for="available_status">Available Status</label>
+                                        <select class="form-control" name="available_status" required >
+                                            <option value="Available">Available</option>
+                                            <option value="Booked">Booked</option>
+                                            <option value="Sold">Sold</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="form-group m-2">
+                                <label for="publication_status">Publication Status <span class="red">*</span></label>
+                                <select class="form-control" name="publication_status"  required >
+                                    <option value="no">Stop Publication</option>
+                                    <option value="yes">Publication</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12">
+                            <div class="form-group m-2">
+                                <label for="video_link">Video Link</label>
+                                <input type="url" class="form-control" name="video_link"  value="{{data.video_link}}">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-xs-12 col-sm-12">
+                            
+                            <link href="https://asbd.trishalbazar.com/data/resize/css/main.css" rel="stylesheet" type="text/css" />
+                            <link href="https://asbd.trishalbazar.com/data/resize/css/jquery.Jcrop.min.css" rel="stylesheet" type="text/css" />
+                            <!-- add scripts -->
+                            <script src="https://asbd.trishalbazar.com/data/resize/js/jquery.min.js"></script>
+                            <script src="https://asbd.trishalbazar.com/data/resize/js/jquery.Jcrop.min.js"></script>
+                            <script src="https://asbd.trishalbazar.com/data/resize/js/script.js"></script>
+                            
+                            <style type="text/css">
+                                .jcrop-holder {direction:ltr;text-align:left;overflow: scroll; width: 1396px !important; height: auto}
+                                .parentUploadImg {position: relative;width: 100px;height: 100px;}
+                                .uploadImg {width: 100%;height: 100%;border: 1px solid;cursor: pointer;}
+                                #removeImage{position:absolute;top: 18px;right: 0;}
+                                #removeImage p {
+                                    border-radius: 5px;
+                                    color: #fff;
+                                    cursor: pointer;
+                                    margin: 0;
+                                    padding: 0 5px 5px;
+                                }
+                            </style>
+                            
+                            <div class="col-xs-12 col-sm-12" id="imageLoadss">
+                                
+                                <div class = 'add_image_wrapper'>
+                                    <div class = "upload">
+                                        <div class = "upload-wrapper">
+                                            <div class = "upload-img">
+                                                <!-- image here -->
+                                            </div>
+                                            <div class = "upload-info">
+                                                <p>
+                                                    <span class = "upload-info-value">0</span> file(s) uploaded.
+                                                </p>
+                                            </div>
+                                            <div class = "upload-area">
+                                                <div class = "upload-area-img">
+                                                    <img src = "assets/upload.png" alt = "">
+                                                </div>
+                                                <p class = "upload-area-text">Select images or <span>browse</span>.</p>
+                                            </div>
+                                            <input type = "file" class = "visually-hidden" id = "upload-input" name='files[]' multiple>
+                                        </div>
+                                    </div>
+                                </div>
+                                                                
+                               
+                                
+                               
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm" data-dismiss="modal">
+                        <i class="ace-icon fa fa-times"></i>
+                        Cancel
+                    </button>
+                    <button class="btn btn-sm btn-primary disabledBtn" type="submit">
+                        <i class="ace-icon fa fa-check"></i>
+                        <span class="update">Save</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{%endblock main_card%}
+
+
+
+{% block main %}
+
+
+
+{% endblock main %}
+
+
+{% block footer %}
+{% endblock footer %}
+{% block js %}
+
+<script>
+$(document).ready(function(){
+    $(".upload-area").click(function(){
+        $('#upload-input').trigger('click');
+    });
+
+    $('#upload-input').change(event => {
+        if(event.target.files){
+            let filesAmount = event.target.files.length;
+            $('.upload-img').html("");
+
+            for(let i = 0; i < filesAmount; i++){
+                let reader = new FileReader();
+                reader.onload = function(event){
+                    let html = `
+                        <div class = "uploaded-img">
+                            <img src = "${event.target.result}">
+                            <button type = "button" class = "remove-btn">
+                                <i class = "fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                    $(".upload-img").append(html);
+                }
+                reader.readAsDataURL(event.target.files[i]);
+            }
+
+            $('.upload-info-value').text(filesAmount);
+            $('.upload-img').css('padding', "20px");
+        }
+    });
+
+    $(window).click(function(event){
+        if($(event.target).hasClass('remove-btn')){
+            $(event.target).parent().remove();
+        } else if($(event.target).parent().hasClass('remove-btn')){
+            $(event.target).parent().parent().remove();
+        }
+    })
+});
+
+</script>
+{% endblock js %}
+

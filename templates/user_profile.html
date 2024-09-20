@@ -1,0 +1,216 @@
+{% extends 'main.html' %}
+
+
+
+
+{%block main_card%}
+
+<nav class="breadcrumbs">
+    <a style="color: rgb(18, 51, 51); text-decoration: none;" href="/" class="breadcrumbs__item"><i style="font-size: 22px;" class="mx-2 bi bi-house-door"></i>Home</a>
+    <a style="color: rgb(9, 43, 43); text-decoration: none;" href="/users" class="breadcrumbs__item"><i style="font-size: 22px;" class="mx-2 bi bi-disc-fill"></i>Users</a>
+    <a style="color: rgb(9, 43, 43); text-decoration: none;" href="" class="breadcrumbs__item"><i style="font-size: 22px;" class="mx-2 bi bi-disc-fill"></i>Edit User</a> 
+</nav>
+  
+
+<form action="/user_profile"  method="POST" enctype="multipart/form-data">
+<div class="row">
+    <div class="my-4 px-4">
+        <h2 class="fw-bold h-font text-center">Welcome, User </h2>
+        <div class="h-line bg-dark"></div>
+
+        
+    </div>
+    <div class="col-lg-3">
+        <input type="text" name="images" value="{{data.images}}">
+
+
+
+    </div>
+    <div class="col-lg-1">
+      
+
+
+
+    </div>
+
+    <div class="col">
+        
+    
+    
+        <div style="border: 0cap;" class="modal-content ">
+            <div class="row justify-content center">
+                <div class="col">               
+                        
+                        <div class="modal-body py-5   row justify-content center">
+    
+                            <div class="container col-lg-10 bg-light shadow rounded p-5">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label">Name</label>
+                                            <input name="name" type="text" class="form-control shadow-none" value="{{data.name}}">
+    
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input name="email" type="email" class="form-control shadow-none"value="{{data.email}}">
+    
+                                        </div>
+                                    </div>
+    
+                                </div>
+    
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label">Mobile</label>
+                                            <input name="mobile" type="number" class="form-control shadow-none" value="{{data.mobile}}">
+    
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label">Address</label>
+                                            <input name="address" type="text" class="form-control shadow-none "value="{{data.address}}" >
+    
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                                
+                                
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label">Username</label>
+                                            <input name="username" disabled type="text" class="form-control shadow-none"value="{{data.username}}"  >
+    
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label">Type</label>
+                                            <input name="type" disabled type="text" class="form-control  shadow-none"value="{{data.type}}"  >
+    
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label">Status</label>
+                                            <select style="height: 40px;" class="select form-field d-flex align-items-center col mx-3 px-2 form-control focusField"  name="status"   required>
+                                                {%if data.status=="Active"%}
+                                                    <option value="Active">Active </option>
+                                                    <option value="Inactive">Inactive </option>
+                                                {%else%}
+                                                    
+                                                    <option value="Inactive">Inactive </option>
+                                                    <option value="Active">Active </option>
+                                                {%endif%}
+                                            </select>
+    
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <label class="form-label">Farm</label>
+                                            <input disabled name="farm" type="text" class="form-control  shadow-none"value="{{data.farm}}"  >
+    
+                                        </div>
+                                    </div>
+                                </div>
+    
+    
+                                
+                                
+    
+                                <div class="d-flex flex-row-reverse">
+                                    <button name="/user_profile" type="submit" class="btn btn-outline-dark shadow-none mt-2" >
+                                        Save
+                                    </button>
+    
+    
+                                </div>
+                                
+                                <!-- javascrit karon click korle kothao jabe na -->
+                            </div>
+    
+                        </div>
+                    
+    
+    
+                </div>
+                
+                
+            </div>
+        </div>
+       
+
+
+    </div>
+
+</div>
+
+</form>
+
+{%endblock main_card%}
+
+
+
+{% block main %}
+
+
+
+{% endblock main %}
+
+
+{% block footer %}
+{% endblock footer %}
+{% block js %}
+
+<script>
+$(document).ready(function(){
+    $(".upload-area").click(function(){
+        $('#upload-input').trigger('click');
+    });
+
+    $('#upload-input').change(event => {
+        if(event.target.files){
+            let filesAmount = event.target.files.length;
+            $('.upload-img').html("");
+
+            for(let i = 0; i < filesAmount; i++){
+                let reader = new FileReader();
+                reader.onload = function(event){
+                    let html = `
+                        <div class = "uploaded-img">
+                            <img src = "${event.target.result}">
+                            <button type = "button" class = "remove-btn">
+                                <i class = "fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                    $(".upload-img").append(html);
+                }
+                reader.readAsDataURL(event.target.files[i]);
+            }
+
+            $('.upload-info-value').text(filesAmount);
+            $('.upload-img').css('padding', "20px");
+        }
+    });
+
+    $(window).click(function(event){
+        if($(event.target).hasClass('remove-btn')){
+            $(event.target).parent().remove();
+        } else if($(event.target).parent().hasClass('remove-btn')){
+            $(event.target).parent().parent().remove();
+        }
+    })
+});
+
+</script>
+{% endblock js %}
+

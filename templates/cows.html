@@ -1,0 +1,95 @@
+{% extends 'main.html' %}
+
+
+
+
+{%block main_card%}
+
+<nav class="breadcrumbs">
+    <a style="color: rgb(18, 51, 51); text-decoration: none;" href="/" class="breadcrumbs__item"><i style="font-size: 22px;" class="mx-2 bi bi-house-door"></i>Home</a>
+    <a style="color: rgb(9, 43, 43); text-decoration: none;" href="/cows" class="breadcrumbs__item"><i style="font-size: 22px;" class="mx-2 bi bi-disc-fill"></i>Cows</a> 
+</nav>
+  
+<div class="row">
+    <div class="col-lg-10">
+
+    </div>
+    <div class="col">
+        <button class="btn btn-outline-dark mx-3" >
+            <a style="color: rgb(68, 196, 89);"   class="text-decoration-none" href="/addcow">+ Add Cow</a>
+        </button>
+    </div>
+
+
+</div>
+
+<div class="row m-3 mt-2">
+    <div style="text-align: center;" class="col-lg-12 mt-4">
+
+        <h1  class="page_tittle mt-2" >Cow Profile List </h1>
+        <div class="h-line bg-dark"></div>
+    </div>
+</div>
+
+<div class="container w-full md:w-4/5 xl:w-3/5  mx-auto px-2">
+
+    <!--Card-->
+    <div id='recipients' class="p-4 mt-4 lg:mt-0 rounded shadow bg-white">
+
+
+        <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+            <thead>
+                <tr>
+                    <th>Cow Id</th>
+                    <th>Purchase Price (BDT)</th>
+                    <th>Purchase Date</th>
+                    <th>Age</th>
+                    <th>Weight</th>
+                    <th>Status</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cow in data %}
+                <tr>
+                    <td>{{cow.cow_id}}</td>
+                    <td>{{cow.purchase_price}}</td>
+                    <td>{{cow.purchase_date}}</td>
+                    <td>{{cow.purchase_age}}</td>
+                    <td>{{cow.purchase_weight}}</td>
+                    <td>{{cow.cow_status}}</td>
+                    {% set lst=cow.images.split(',') %}
+                    <td><img src="{{url_for('static', filename='uploads/'+lst[0])}}" style="height : 100px;" class="d-block w-70" alt="..."></td>
+                    <td><a style="color: inherit;"   href="/cow_edit/{{cow.cow_id}}"><i style="font-size: 30px;" class="m-2 bi bi-pencil-square"></i></a> <a onclick="alert('Permanently Delete {{cow.cow_id}}!')" style="color: inherit;" href="/cow_delete/{{cow.cow_id}}"><i style="font-size: 30px;" class="bi bi-trash3"></i></a></td>
+                </tr>
+                {% endfor %}
+
+                
+                
+            </tbody>
+
+        </table>
+
+
+    </div>
+    <!--/Card-->
+
+
+</div>
+
+
+
+{%endblock main_card%}
+
+
+
+{% block main %}
+
+
+
+{% endblock main %}
+
+
+{% block footer %}
+{% endblock footer %}

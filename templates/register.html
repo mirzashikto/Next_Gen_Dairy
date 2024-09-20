@@ -1,0 +1,89 @@
+{% extends 'main.html' %}
+{% block navbar %}
+{% endblock navbar %}
+
+
+
+
+
+{% block main %}
+
+<div class="wrapperreg wrapper mt-4">
+    <div class="logo">
+        <img src="{{url_for('static',filename='images/facilities/1.png')}}" alt="">
+    </div>
+    <div class="text-center mt-4 name">
+        Next Gen
+    </div>
+    <form class="p-3 mt-3" action="/register" method="POST">
+        <div class="form-field d-flex align-items-center col">
+            <span class="far fa-user"></span>
+            <input type="text" name="name"  placeholder="Name" required>
+        </div>
+        <div class="row">
+            <div class="form-field d-flex align-items-center col mx-3">
+                <span class="far fa-user"></span>
+                <input type="text" name="username"  placeholder="Username" required>
+            </div>
+            <div class="form-field d-flex align-items-center col mx-3">
+                <span class="far fa-user"></span>
+                <input type="text" name="email"  placeholder="Email" required>
+            </div>
+    
+
+        </div>
+        
+        <div class="row">
+            <div class="form-field d-flex align-items-center col mx-3">
+                <span class="far fa-user"></span>
+                <input type="text" name="password"  placeholder="Password" required>
+            </div>
+            <div class="form-field d-flex align-items-center col mx-3">
+                <span class="fas fa-key"></span>
+                <input type="text" name="re_enter_password"  placeholder="Re-enter Password" required>
+            </div>
+
+        </div>
+        <div class="form-field d-flex align-items-center ">
+            <span class="far fa-user"></span>
+            <input type="text" name="address"  placeholder="Address" required>
+        </div>
+        <div class="form-field d-flex align-items-center ">
+            <span class="far fa-user"></span>
+            <input type="text" name="mobile"  placeholder="Mobile" required>
+        </div>
+        <div class="row">
+            <select class="select form-field d-flex align-items-center col mx-3"  name="type"   required>
+            
+                <option value="Manager">Manager </option>
+                <option value="Supervisor">Supervisor </option>
+                <option value="Accountant">Accountant </option>
+            </select>
+    
+            <select class="select form-field d-flex align-items-center col mx-3"  name="farm"   required>
+                
+                <option value="Next Gen">Next Gen </option>
+                <option value="Cp">Cp </option>
+                <option value="Other">Others </option>
+            </select>
+            
+
+        </div>
+        
+        
+        <button type="submit" class="btn mt-3">Register</button>
+    </form>
+    <div class="text-center fs-6">
+         <a href="/login">Login</a>
+    </div>
+</div>
+{% endblock main %}
+
+
+
+
+
+
+
+{% block footer %}
+{% endblock footer %}

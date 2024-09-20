@@ -21,121 +21,118 @@
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"> 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>  
 
+<!-- flash message -->
+<div class="sticky-top" >
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for category, message in messages %}
+    <div style="display: flex;" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+</div>
 {% block navbar %}
 
-<nav  class="navbar navbar-expand-lg navbar-light bg-white  px-lg-3 py-lg-2 shadow-sm sticky-top"> <!-- from bootstarp website -->
-    
+<nav style="height: 50px;" class="navbar navbar-expand-lg navbar-light bg-dark  px-lg-3 py-lg-2 shadow-sm sticky-top"> <!-- from bootstarp website -->
+
     <div class="container-fluid">
-        <a  class="menu-toggle col-lg-1"><h2><i style="font-size: 30px;" class="bi bi-list "></i></h2></a>
-        <a class="navbar-brand me-5 fw-bold fs-3 h-font col-lg-9" href="/">Next Gen </a>
         
-        
-            
-          
-            <div class="d-flex">
-
-
-                <button class="btn btn-outline-dark " >
-                    <a style="color: rgb(188, 108, 235);"   class="text-decoration-none" href="/logout">Log out</a>
-                </button>
-
-
-                <div class="px-3"><!-- profile button -->
-                    <a href="/user_profile"><h4><i  style="color: rgb(121, 78, 172);" class="bi bi-person-circle"></i></h4></a>
-                </div>
+        <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul style="visibility: hidden;" class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link  me-2" aria-current="page" href="/public_portal">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link me-2" href="#the_cows">Glossary</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link me-2" href="#facilities">Privacy Policy</a>
+                </li>
                 
+                <li class="nav-item">
+                    <a class="nav-link me-2" href="/">My Account</a>
+                </li>
+                
+
+
+            </ul>
+            <a class="nav-link text-white me-2" aria-current="page" href="/public_portal">About Us</a>
+            <a class="nav-link text-white me-2" aria-current="page" href="/public_portal">Glossary</a>
+            <a class="nav-link text-white me-2" aria-current="page" href="/public_portal">Privacy Policy</a>
             
+            
+            <div class="d-flex ">
+
+                
+                <button type="button" class="btn btn-light btn-outline-dark shadow-none me-lg-2 me-3" data-bs-toggle="modal" data-bs-target="#loginmodal">
+                    Login
+                </button>
+                <button type="button" class=" btn btn-light btn btn-outline-dark shadow-none me-lg-2 me-3" data-bs-toggle="modal" data-bs-target="#registermodal">
+                    Register
+                </button>
             </div>
             
+			 
+          
         </div>
     </div>
 </nav>
-<!-- flash message -->
-<div class="" >
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <ul class=flashes>
-        {% for category, message in messages %}
-        <div style="display: flex;" class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>{{message}}</strong> 
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-    </div>
-    
-
-
-<!--  -->
-<div class='dashboard dashboard-compact'>
-    <div class="dashboard-nav">
-        <header><a href="" class="menu-toggle"><i class="bi bi-x-lg"></i></a>
-            <a href="#" class="brand-logo"><i class="fas fa-anchor"></i> <span><h2>Next Gen</h2></span></a>
-        </header>
-        <nav class="dashboard-nav-list mt-3">
-            <a href="#" class="dashboard-nav-item"><i class="fas fa-home"></i>Dashboard </a>
-            <a href="#" class="dashboard-nav-item active"><i class="fas fa-tachometer-alt"></i> Farm Info</a>
-            <a href="/users" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> Users </a>
-            <a href="/cows" class="dashboard-nav-item"><i class="fas fa-file-upload"></i> Cows </a>
-            <div class='dashboard-nav-dropdown'>
-                <a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fas fa-photo-video"></i> General Setup </a>
-                <div class='dashboard-nav-dropdown-menu'>
-                    <a href="#" class="dashboard-nav-dropdown-item">All</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Recent</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Images</a>
-                    <a href="#" class="dashboard-nav-dropdown-item">Video</a>
-                </div>
-            </div>
-            <div class='dashboard-nav-dropdown'><a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i
-                    class="fas fa-users"></i> Users </a>
-                <div class='dashboard-nav-dropdown-menu'><a href="#"
-                                                            class="dashboard-nav-dropdown-item">All</a><a
-                        href="#" class="dashboard-nav-dropdown-item">Subscribed</a><a
-                        href="#"
-                        class="dashboard-nav-dropdown-item">Non-subscribed</a><a
-                        href="#" class="dashboard-nav-dropdown-item">Banned</a><a
-                        href="#" class="dashboard-nav-dropdown-item">New</a></div>
-            </div>
-            <div class='dashboard-nav-dropdown'><a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i
-                    class="fas fa-money-check-alt"></i> Payments </a>
-                <div class='dashboard-nav-dropdown-menu'><a href="#"
-                                                            class="dashboard-nav-dropdown-item">All</a><a
-                        href="#" class="dashboard-nav-dropdown-item">Recent</a><a
-                        href="#" class="dashboard-nav-dropdown-item"> Projections</a>
-                </div>
-            </div>
-            <a href="#" class="dashboard-nav-item"><i class="fas fa-cogs"></i> Settings </a><a
-                    href="#" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
-          <div class="nav-item-divider"></div>
-          <a href="/logout" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout </a>
 
 
 
 
-        </nav>
-        
+<nav class="navbar navbar-expand-lg navbar-light bg-white  px-lg-3 py-lg-2 shadow-sm sticky-top"> <!-- from bootstarp website -->
 
-    </div>
-    <div class='dashboard-app'>
-        
-        <div class='dashboard-content'>
-            <div class='container'>
+    <div class="container-fluid">
+        <img src="{{url_for('static', filename='images/logo.png')}}" style="height : 80px;" class="d-block w-40" alt="...">
+        <a class="navbar-brand me-5 fw-bold fs-3 " href="/">NextGEN Cattle</a>
+        <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link  me-2" aria-current="page" href="/public_portal">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link me-2" href="#the_cows">All Cattle</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link me-2" href="#facilities">Facilities</a>
+                </li>
                 
-                    
+                <li class="nav-item">
+                    <a class="nav-link me-2" href="/">Terms</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link me-2" href="/">Glossary</a>
+                </li>
+
+
+            </ul>
             
-                {%block main_card%}
-                    i am card
-                {% endblock main_card%}
+            <h5 class="h-font">Call Us</h5>
 
-
-                    
-                
-            </div>
+			<a class="text-decoration-none text-dark" href="tel: +8801711254478">
+				<i class="bi bi-telephone-outbound-fill px-2"></i>
+			+8801711254478</a>
+			<br>
+            
+			 
+          
         </div>
     </div>
-</div>
+</nav>
+
+
 
 <!-- Modal for Login -->
 <div class="modal fade" id="loginmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -325,7 +322,7 @@
     <div class="container-fluid bg-white pt-4">
 		<div class="row justify-content-evenly">
 			<div class="col-lg-4 px-3">
-				<h5 class="h-font fw-bold mt-3 text-center">Athina Dental Care</h5>
+				<h5 class="h-font fw-bold mt-3 text-center">Next Gen Dairy</h5>
 				<p class="mt-2 text-center">Committed to Serve. consectetur adipisicing elit, sed do eiusmod
 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

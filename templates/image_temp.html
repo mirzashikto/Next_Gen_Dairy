@@ -1,0 +1,97 @@
+{% extends 'main.html' %}
+{% block navbar %}
+{% endblock navbar %}
+
+
+
+{%block main_card%}
+
+
+{%endblock main_card%}
+
+
+
+
+
+{% block main %}
+
+<form method="POST" action="/test" enctype="multipart/form-data">
+    <div class = 'add_image_wrapper'>
+        <div class = "upload">
+            <div class = "upload-wrapper">
+                <div class = "upload-img">
+                    <!-- image here -->
+                </div>
+                <div class = "upload-info">
+                    <p>
+                        <span class = "upload-info-value">0</span> file(s) uploaded.
+                    </p>
+                </div>
+                <div class = "upload-area">
+                    <div class = "upload-area-img">
+                        <img src = "assets/upload.png" alt = "">
+                    </div>
+                    <p class = "upload-area-text">Select images or <span>browse</span>.</p>
+                </div>
+                <input type = "file" class = "visually-hidden" id = "upload-input" name='files[]' multiple>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-sm btn-primary disabledBtn" type="submit">
+        <i class="ace-icon fa fa-check"></i>
+        <span class="update">Save</span>
+    </button>                          
+   
+</form>
+
+{% endblock main %}
+
+
+{% block footer %}
+{% endblock footer %}
+
+{% block js %}
+<script>
+    $(document).ready(function(){
+        $(".upload-area").click(function(){
+            $('#upload-input').trigger('click');
+        });
+    
+        $('#upload-input').change(event => {
+            if(event.target.files){
+                let filesAmount = event.target.files.length;
+                $('.upload-img').html("");
+    
+                for(let i = 0; i < filesAmount; i++){
+                    let reader = new FileReader();
+                    reader.onload = function(event){
+                        let html = `
+                            <div class = "uploaded-img">
+                                <img src = "${event.target.result}">
+                                <button type = "button" class = "remove-btn">
+                                    <i class = "fas fa-times"></i>
+                                </button>
+                            </div>
+                        `;
+                        $(".upload-img").append(html);
+                    }
+                    reader.readAsDataURL(event.target.files[i]);
+                }
+    
+                $('.upload-info-value').text(filesAmount);
+                $('.upload-img').css('padding', "20px");
+            }
+        });
+    
+        $(window).click(function(event){
+            if($(event.target).hasClass('remove-btn')){
+                $(event.target).parent().remove();
+            } else if($(event.target).parent().hasClass('remove-btn')){
+                $(event.target).parent().parent().remove();
+            }
+        })
+    });
+    
+    </script>
+    
+{% endblock js %}

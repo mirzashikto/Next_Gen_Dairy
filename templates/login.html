@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+{% block navbar %}
+{% endblock navbar %}
+
+
+
+
+
+{% block main %}
+<div class="wrapper mt-4">
+    <div class="logo">
+        <img src="{{url_for('static',filename='images/facilities/1.png')}}" alt="">
+    </div>
+    <div class="text-center mt-4 name">
+        Welcom User
+    </div>
+    <form class="p-3 mt-3" action="/login" method="POST">
+        <div class="form-field d-flex align-items-center">
+            <span class="far fa-user"></span>
+            <input type="text" name="username" placeholder="Username">
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <span class="fas fa-key"></span>
+            <input type="password" name="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn mt-3">Login</button>
+    </form>
+    <div class="text-center fs-6">
+         <a href="/register">Sign up</a>
+    </div>
+</div>
+{% endblock main %}
+
+
+
+
+
+
+
+{% block footer %}
+{% endblock footer %}
